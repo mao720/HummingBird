@@ -4,7 +4,7 @@ import React from "react";
 import Date from "../../components/date";
 
 export default function Post({postData}: any) {
-    return <div className="w-screen flex flex-col items-center">
+    return <div className="w-full flex flex-col items-center">
         <Head><title>{postData.title}</title></Head>
         <article
             className="prose lg:prose-xl prose-yellow w-11/12 md:w-2/3 md:max-w-5xl flex flex-col items-center py-8 px-8 md:px-24 my-6 border border-gray-300">

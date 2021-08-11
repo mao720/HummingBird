@@ -1,12 +1,15 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from "next/link"
-import React from "react"
-import {getSortedPostsData} from "../lib/posts"
+import React, {useState} from "react"
+import {getLabelMapOfPostsDataList, getSortedPostsData} from "../lib/posts"
 import PostItem from "../components/PostItem"
 import Footer from "../components/Footer"
+import {GRADIENT_COLORS} from "../components/colors";
 
-export default function Home({allPostsData}: any) {
+export default function Home({labels, labelMap}: any) {
+    let [postsList, setPostsList] = useState(labelMap[labels[0]])
+    let [selectedLabelIndex, setSelectedLabelIndex] = useState(0)
     return (
         <div className="flex flex-col items-center h-screen overflow-y-hidden bg-gray-50">
             <Head>
@@ -31,9 +34,24 @@ export default function Home({allPostsData}: any) {
                     </a>
                 </Link>
             </nav>
-            <main className="flex w-full overflow-y-scroll flex-1 flex-col items-center mt-8 md:mt-12 pb-12 font-kai">
-                <ul className="w-11/12  my-8 md:w-2/3">
-                    {allPostsData.map(({id, date, title}: any) =>
+            <main className="flex w-full overflow-y-scroll flex-1 flex-col items-center mt-12 font-kai">
+                <ul className="my-8 md:my-12 w-11/12 md:w-2/3">
+                    <div className="flex flex-row mb-4 md:mb-8 flex-wrap">
+                        {labels.map((value: any, index: number) => {
+                                let style = selectedLabelIndex == index ? GRADIENT_COLORS[index % GRADIENT_COLORS.length]
+                                    + " text-white" : ""
+                                let length = labelMap[value].length;
+                                return <button
+                                    className={"mx-1 px-1 rounded text-sm font-thin bg-gradient-to-r " + style}
+                                    onClick={() => {
+                                        setSelectedLabelIndex(index)
+                                        setPostsList(labelMap[value])
+                                    }}
+                                    key={value}>{value + (length > 0 ? (' (' + length + ')') : '')}</button>
+                            }
+                        )}
+                    </div>
+                    {postsList.map(({id, date, title}: any) =>
                         <PostItem id={id} date={date} title={title} key={id}/>
                     )}
                 </ul>
@@ -45,9 +63,17 @@ export default function Home({allPostsData}: any) {
 
 export async function getStaticProps() {
     const allPostsData = getSortedPostsData()
+    const labelMap = getLabelMapOfPostsDataList(allPostsData)
+    const labels = []
+    for (let labelMapKey in labelMap) {
+        if (labelMap.hasOwnProperty(labelMapKey)) {
+            labels.push(labelMapKey)
+        }
+    }
     return {
         props: {
-            allPostsData
+            labels,
+            labelMap,
         }
     }
 }

@@ -23,18 +23,34 @@ export function getSortedPostsData() {
         // Combine the data with the id
         return {
             id,
-            date: '2000-01-01',
             ...matterResult.data
         }
     })
     // Sort posts by date
-    return allPostsData.sort((a, b) => {
+    return allPostsData.sort((a: any, b: any) => {
         if (a.date < b.date) {
             return 1
         } else {
             return -1
         }
     })
+}
+
+export function getLabelMapOfPostsDataList(allPostsData: any) {
+    const labelMap: any = {}
+    labelMap['All'] = allPostsData
+    allPostsData.forEach((value: any) => {
+        value.label && value.label.split(',').forEach((label: string) => {
+            if (labelMap[label]) {
+                let list: [any] = labelMap[label]
+                list.push(value)
+                labelMap[label] = list
+            } else {
+                labelMap[label] = [value]
+            }
+        })
+    })
+    return labelMap
 }
 
 export function getAllPostIds() {
@@ -79,7 +95,6 @@ export async function getPostData(id: any) {
     return {
         id,
         contentHtml,
-        date: '2000-01-01',
         ...matterResult.data
     }
 }
