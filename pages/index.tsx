@@ -2,7 +2,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Link from "next/link"
 import React, {useState} from "react"
-import {getLabelMapOfPostsDataList, getSortedPostsData} from "../lib/posts"
+import {getLabelMapOfPostsDataList, getLabels, getSortedPostsData} from "../lib/posts"
 import PostItem from "../components/PostItem"
 import Footer from "../components/Footer"
 import {GRADIENT_COLORS} from "../components/colors";
@@ -64,12 +64,7 @@ export default function Home({labels, labelMap}: any) {
 export async function getStaticProps() {
     const allPostsData = getSortedPostsData()
     const labelMap = getLabelMapOfPostsDataList(allPostsData)
-    const labels = []
-    for (let labelMapKey in labelMap) {
-        if (labelMap.hasOwnProperty(labelMapKey)) {
-            labels.push(labelMapKey)
-        }
-    }
+    const labels = getLabels(labelMap)
     return {
         props: {
             labels,

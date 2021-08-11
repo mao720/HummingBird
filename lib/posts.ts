@@ -27,13 +27,7 @@ export function getSortedPostsData() {
         }
     })
     // Sort posts by date
-    return allPostsData.sort((a: any, b: any) => {
-        if (a.date < b.date) {
-            return 1
-        } else {
-            return -1
-        }
-    })
+    return allPostsData.sort((a: any, b: any) => a.date < b.date ? 1 : -1)
 }
 
 export function getLabelMapOfPostsDataList(allPostsData: any) {
@@ -51,6 +45,16 @@ export function getLabelMapOfPostsDataList(allPostsData: any) {
         })
     })
     return labelMap
+}
+
+export function getLabels(labelMap: any) {
+    const labels = []
+    for (let labelMapKey in labelMap) {
+        if (labelMap.hasOwnProperty(labelMapKey)) {
+            labels.push(labelMapKey)
+        }
+    }
+    return labels.sort((a: any, b: any) => labelMap[a].length < labelMap[b].length ? 1 : -1)
 }
 
 export function getAllPostIds() {
