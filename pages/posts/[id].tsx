@@ -3,15 +3,14 @@ import Head from "next/head";
 import React from "react";
 import Date from "../../components/date";
 
-export default function Post({postData}) {
+export default function Post({postData}: any) {
     return <div className="w-screen flex flex-col items-center">
         <Head><title>{postData.title}</title></Head>
         <article
-            className="prose lg:prose-xl w-11/12 md:w-2/3 flex flex-col items-center py-8 px-8 md:px-24 my-6 border border-gray-300">
-            <h2 className="font-kai">{postData.title}</h2>
-            <div className="">
-                <Date dateString={postData.date}/>
-            </div>
+            className="prose lg:prose-xl prose-yellow w-11/12 md:w-2/3 md:max-w-5xl flex flex-col items-center py-8 px-8 md:px-24 my-6 border border-gray-300">
+            <h3 className="font-kai">{postData.title}</h3>
+            <Date dateString={postData.date}/>
+            <p className="w-full bg-gray-300 h-px"/>
             <div className="" dangerouslySetInnerHTML={{__html: postData.contentHtml}}/>
         </article>
     </div>
@@ -25,7 +24,7 @@ export async function getStaticPaths() {
     }
 }
 
-export async function getStaticProps({params}) {
+export async function getStaticProps({params}: any) {
     const postData = await getPostData(params.id)
     return {
         props: {
