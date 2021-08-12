@@ -47,4 +47,7 @@ val constraintSet = ConstraintSet().apply {
 }
 constraintSet.applyTo(constraintLayout)
 ```
-20. 自动实现的动画：TransitionManager.beginDelayedTransition(constraintLayout)
+20. 自动实现的动画：
+```
+TransitionManager.beginDelayedTransition(constraintLayout)
+```

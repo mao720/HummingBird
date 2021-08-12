@@ -18,7 +18,7 @@ export default function Home({labels, labelMap}: any) {
                 <link rel="icon" href={"/images/hummingbird.jpeg"}/>
             </Head>
             <nav className="absolute flex items-center h-12 w-full shadow-md">
-                <Link href="/about">
+                <Link href={"/about"}>
                     <a className="flex h-12 flex-row items-center hover:bg-blue-100"
                        target="_self" rel="noopener noreferrer">
                         <Image className="" src="/images/hummingbird.jpeg" alt="hummingbird"
@@ -27,7 +27,7 @@ export default function Home({labels, labelMap}: any) {
                     </a>
                 </Link>
                 <p className="flex flex-1"/>
-                <Link href="/about">
+                <Link href={"/about"}>
                     <a className="h-12 flex px-4 items-center justify-center hover:bg-blue-100"
                        target="_self" rel="noopener noreferrer">
                         <text className="">About</text>

@@ -27,7 +27,7 @@ export function getSortedPostsData() {
         }
     })
     // Sort posts by date
-    return allPostsData.sort((a: any, b: any) => a.date < b.date ? 1 : -1)
+    return allPostsData.sort((a: any, b: any) => !a.date || a.date < b.date ? 1 : -1)
 }
 
 export function getLabelMapOfPostsDataList(allPostsData: any) {

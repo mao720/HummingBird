@@ -7,7 +7,7 @@ export default function PostItem({id, date, title}: any) {
         <Link href={`/posts/${id}`}>
             <a className="flex flex-1 flex-col border border-gray-300 p-4 rounded-lg hover:shadow-lg hover:bg-yellow-50 md:p-8">
                 <Date dateString={date}/>
-                <text className="text-base md:text-lg mt-2 text-black">{title}</text>
+                <text className="text-base md:text-lg mt-2 text-black">{title ? title : id}</text>
             </a>
         </Link>
     </li>
