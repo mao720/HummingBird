@@ -7,8 +7,8 @@ export default function Post({postData}: any) {
     return <div className="w-full flex flex-col items-center">
         <Head><title>{postData.title}</title></Head>
         <article
-            className="prose lg:prose-xl prose-yellow w-11/12 md:w-2/3 md:max-w-5xl flex flex-col items-center py-8 px-8 md:px-24 my-6 border border-gray-300">
-            <h3 className="font-kai">{postData.title}</h3>
+            className="prose prose-yellow w-11/12 md:w-2/3 md:max-w-5xl flex flex-col items-center py-8 px-4 md:px-24 my-6 border border-gray-300">
+            <h2 className="font-kai">{postData.title}</h2>
             <Date dateString={postData.date}/>
             <p className="w-full bg-gray-300 h-px"/>
             <div className="" dangerouslySetInnerHTML={{__html: postData.contentHtml}}/>

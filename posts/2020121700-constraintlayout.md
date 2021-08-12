@@ -23,7 +23,7 @@ label: 'Android,ConstraintLayout'
 14. 自定义ConstraintHelper控件：在updatePostLayout回调方法（view加载完成）中统一处理view，比如做动画，注意要使用referencedIds获取子View
 15. PlaceHolder控件：setContentId（id），使用另外一个view取代holder的位置，（第一次设置，移动到空位置，后续再setContentId是两个已存在的view位置替换）
 16. ConstraintSet：类似Layoutparam
-```
+```kotlin
 val constraintLayout = view as ConstraintLayout
 val constraintSet = ConstraintSet().apply {
     clone(constraintLayout)
@@ -39,7 +39,7 @@ constraintSet.applyTo(constraintLayout)
 17. 自定义VirtualLayout控件：updatePreLayout（）在布局之前，统一设置ConstraintSet
 18. Flow控件（继承VirtualLayout抽象类）：表格控件，verticalGap（间距），wrapMode（样式，aligned，chain）
 19. 同样的界面元素，在两个layout文件中，展示不同的样式：
-```
+```kotlin
 val constraintLayout = view as ConstraintLayout
 val constraintSet = ConstraintSet().apply {
      isForceId = true //id对不上也行？
@@ -48,6 +48,6 @@ val constraintSet = ConstraintSet().apply {
 constraintSet.applyTo(constraintLayout)
 ```
 20. 自动实现的动画：
-```
+```java
 TransitionManager.beginDelayedTransition(constraintLayout)
 ```

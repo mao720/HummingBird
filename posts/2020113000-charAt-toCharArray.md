@@ -19,7 +19,7 @@ label: 'Java,String,Algorithm'
 1. String 使用 charAt 比使用 toCharArray 遍历，效率要高。
 2. 避免在 for 循环中使用 s.length() 方法，可以显著提升效率。
 3. 虽然底层都调用了 C 语言的 Native 方法，toCharArray 多了复制数组的一个步骤，所以会慢，因为 String 的数据结构本来也是数组。
-```
+```java
 public static void test() {
         long t1 = 0;
         long t2 = 0;
@@ -58,7 +58,7 @@ public static void test() {
         }
         System.out.println(t1);
         System.out.println(t2);
-    }
+}
 ```
 很快啊
 

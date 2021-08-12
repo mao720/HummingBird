@@ -91,6 +91,7 @@ export async function getPostData(id: any) {
 
     // Use remark to convert markdown into HTML string
     const processedContent = await remark()
+        .use(require("remark-prism"))
         .use(html)
         .process(matterResult.content)
     const contentHtml = processedContent.toString()
