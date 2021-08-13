@@ -6,7 +6,6 @@
 @layer base {
     code[class*="language-"],
     pre[class*="language-"] {
-        @apply min-w-full w-0;/*调整宽度*/
         color: black;
         background: none;
         /*text-shadow: 0 1px white;*/
