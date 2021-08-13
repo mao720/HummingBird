@@ -9,7 +9,20 @@ import {GRADIENT_COLORS} from "../components/colors";
 
 export default function Home({labels, labelMap}: any) {
     let [postsList, setPostsList] = useState(labelMap[labels[0]])
-    let [selectedLabelIndex, setSelectedLabelIndex] = useState(0)
+    let [selectedList, setSelectedList] = useState([true])
+    let onLabelClick = (index: number) => {
+        if (labels[index] == 'All') return
+        let list = selectedList.slice()
+        list[index] = !list[index]
+        setSelectedList(list)
+        setPostsList(labelMap['All'].filter((value: any) => {
+            let ans = true
+            list.forEach((selected, labelIndex) => {
+                if (selected && labels[labelIndex] != 'All' && value.label.indexOf(labels[labelIndex]) == -1) ans = false
+            })
+            return ans
+        }))
+    };
     return (
         <div className="flex flex-col items-center h-screen overflow-y-hidden bg-gray-50">
             <Head>
@@ -38,16 +51,13 @@ export default function Home({labels, labelMap}: any) {
                 <ul className="my-8 md:my-12 w-11/12 md:w-2/3">
                     <div className="flex flex-row mb-4 md:mb-8 flex-wrap">
                         {labels.map((value: any, index: number) => {
-                                let style = selectedLabelIndex == index ? GRADIENT_COLORS[index % GRADIENT_COLORS.length]
+                                let style = selectedList[index] ? GRADIENT_COLORS[index % GRADIENT_COLORS.length]
                                     + " text-white" : ""
                                 let length = labelMap[value].length;
                                 return <button
                                     className={"mx-1 px-1 rounded text-sm font-thin bg-gradient-to-r " + style}
-                                    onClick={() => {
-                                        setSelectedLabelIndex(index)
-                                        setPostsList(labelMap[value])
-                                    }}
-                                    key={value}>{value + (length > 0 ? (' (' + length + ')') : '')}</button>
+                                    onClick={() => onLabelClick(index)}
+                                    key={value}>{value + (length > 1 ? (' (' + length + ')') : '')}</button>
                             }
                         )}
                     </div>
