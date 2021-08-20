@@ -23,7 +23,8 @@ export default function About() {
         </nav>
         <main className="flex flex-1 flex-col mt-12 items-center justify-center overflow-y-auto">
             <text className="font-kai text-xl md:text-3xl">学而不思则罔，思而不学则殆</text>
-            <text className="text-base md:text-xl mt-24 mb-4">（记录知识的个人网站）</text>
+            <text className="text-base md:text-xl mt-36 mb-4">（记录知识的个人网站）</text>
+            <text className="text-base md:text-xl font-kai mt-4">Email: mao720@foxmail.com</text>
             <Link href="https://github.com/mao720">
                 <a className="flex h-12 flex-row items-center"
                    target="_self" rel="noopener noreferrer">

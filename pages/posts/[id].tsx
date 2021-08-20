@@ -4,6 +4,11 @@ import React from "react";
 import Date from "../../components/date";
 
 export default function Post({postData}: any) {
+    //监听浏览器返回事件，保存 shouldScroll 为 true
+    if (typeof window !== 'undefined')
+        window.addEventListener("popstate", function (e) {
+            localStorage.setItem('shouldScroll', 'true')
+        }, false);
     return <div className="w-full flex flex-col items-center">
         <Head><title>{postData.title}</title></Head>
         <article
@@ -14,7 +19,7 @@ export default function Post({postData}: any) {
             <div className="" dangerouslySetInnerHTML={{__html: postData.contentHtml}}/>
         </article>
     </div>
-}
+};
 
 export async function getStaticPaths() {
     const paths = getAllPostIds()
